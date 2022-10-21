@@ -21,6 +21,13 @@ function generateMarkdown(data) {
     // table of contents
     if(data.includeToC == true) {
       markdown += `## Table Of Contents\n`; // how to generate the links to the sections?
+      markdown += `* [Description](#description)\n`;
+      markdown += `* [Installation](#installation)\n`;
+      markdown += `* [Usage](#usage)\n`;
+      markdown += `* [License](#license)\n`;
+      markdown += `* [Contributing](#contributing)\n`;
+      markdown += `* [Tests](#tests)\n`;
+      markdown += `* [Questions](#questions)\n`;
     }
 
     // Description
