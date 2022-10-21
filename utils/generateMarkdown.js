@@ -21,7 +21,7 @@ function renderLicenseBadge(license) {
   if(license) {
     let arr = license.split(' ');
     let licenseType = arr[0];
-    badge = "[![License: " + licenseType + "](https://img.shields.io/badge/License-" + licenseType + "-yellow.svg)]";
+    badge = "![License: " + licenseType + "](https://img.shields.io/badge/License-" + licenseType + "-yellow.svg)";
   }
   return badge;
 }
@@ -29,7 +29,7 @@ function renderLicenseBadge(license) {
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-  let link = "";
+  let licenseStr = "";
   if(license) {
     console.log("input license: "+ license);
     for (let i = 0; i < licenseList.length; i++) {
@@ -37,7 +37,8 @@ function renderLicenseLink(license) {
       console.log("item[0]: " + item[0]);
       if(item[0] == license) {
         console.log("item[1]: " + item[1]);
-        return "("+ item[1] + ")";
+        licenseStr = "This application is covered under the [" + item[0] + "]("+ item[1] + ")";
+        return licenseStr;
       }
     }
   }
@@ -49,7 +50,7 @@ function renderLicenseLink(license) {
 function renderLicenseSection(license) {
   let licenseStr = "";
   if(license) {
-    licenseStr += renderLicenseBadge(license);
+    //licenseStr += renderLicenseBadge(license);
     licenseStr += renderLicenseLink(license);
   }
   return licenseStr;
@@ -62,6 +63,10 @@ function generateMarkdown(data) {
     let markdown = "";
     // title
     markdown += `# ${data.title}\n`;
+
+    // Badge here
+    markdown += renderLicenseBadge(`${data.license}`);
+    markdown += `\n`;
 
     // table of contents
     if(data.includeToC == true) {
@@ -98,7 +103,9 @@ function generateMarkdown(data) {
     markdown += `## Tests\n${data.tests}\n`;
 
     // Questions
-    markdown += `## Questions\n${data.questions}\n`;
+    markdown += `## Questions\n`
+    markdown += `Please visit https://github.com/${data.githubUsername} for more information.\n`;
+    markdown += `If you have any questions, email the author at ${data.email}.\n`;
 
     return markdown;
     

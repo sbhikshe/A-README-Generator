@@ -63,9 +63,14 @@ const questions = [
     },
     {
       type: 'input', 
-      message: "If you have any questions, please reach out to the author at ", 
-      name: 'questions'
-    }
+      message: "Please enter your Github username: ", 
+      name: 'githubUsername'
+    },
+    {
+      type: 'input', 
+      message: "Please enter your email: ", 
+      name: 'email'
+    }   
 ];
 
 function getUserInputs() {
