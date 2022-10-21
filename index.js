@@ -42,7 +42,7 @@ const questions = [
         'BSD 2-Clause "Simplified" License',
         'BSD 3-Clause "New" or "Revised" License',
         'Boost Software License 1.0',
-        'Creative Commons Zero v1.0 Universal',
+        //'Creative Commons Zero v1.0 Universal',
         'Eclipse Public License 2.0',
         'GNU Affero General Public License v3.0',
         'GNU General Public License v2.0',
@@ -52,8 +52,8 @@ const questions = [
       ]
     },
     {
-      type: 'confirm', 
-      message: "Do you want to contribute to this project ...", 
+      type: 'input', 
+      message: "If you’d like to contribute to this project, please reach me at ", 
       name: 'contributing'
     },
     {
@@ -62,8 +62,8 @@ const questions = [
       name: 'tests'
     },
     {
-      type: 'confirm', 
-      message: "Do you have any questions?", 
+      type: 'input', 
+      message: "If you have any questions, please reach out to the author at ", 
       name: 'questions'
     }
 ];
@@ -72,6 +72,8 @@ function getUserInputs() {
   inquirer.prompt(questions).then((response) => { 
               console.log(response);
               let markdown = generateMarkdown.generateMarkdown(response);
+              writeToFile("./gen/README.md", markdown);
+              /*
               fs.writeFile("./gen/README.md", markdown, function(err) {
                 if(err) {
                   console.log("Error in writing to file: " + err);
@@ -79,11 +81,20 @@ function getUserInputs() {
                   console.log("wrote to README.md successfully");
                 }
               });
+              */
             });
 }
 
 // TODO: Create a function to write README file
-//function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, function(err) {
+    if(err) {
+      console.log("Error in writing to file: " + err);
+    } else {
+      console.log("wrote to README.md successfully");
+    }
+  });
+}
 
 // TODO: Create a function to initialize app
 function init(){
