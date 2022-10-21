@@ -71,7 +71,14 @@ const questions = [
 function getUserInputs() {
   inquirer.prompt(questions).then((response) => { 
               console.log(response);
-              generateMarkdown.generateMarkdown(response);
+              let markdown = generateMarkdown.generateMarkdown(response);
+              fs.writeFile("./gen/README.md", markdown, function(err) {
+                if(err) {
+                  console.log("Error in writing to file: " + err);
+                } else {
+                  console.log("wrote to README.md successfully");
+                }
+              });
             });
 }
 
