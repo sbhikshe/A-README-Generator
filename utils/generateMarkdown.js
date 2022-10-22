@@ -1,3 +1,4 @@
+/* A list of licenses */
 const licenseList = [
 ['Apache License 2.0', 'https://opensource.org/licenses/Apache-2.0'],
 ['GNU General Public License v3.0','https://opensource.org/licenses/GPL-3.0'],
@@ -14,50 +15,61 @@ const licenseList = [
 ['The Unlicense','https://opensource.org/licenses/unlicense']
 ];
 
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+// This function returns a license badge based on which license is passed in
+// If there is no license, returns an empty string
 function renderLicenseBadge(license) {
   let badge = "";
   if(license) {
     let arr = license.split(' ');
     let licenseType = arr[0];
-    badge = "![License: " + licenseType + "](https://img.shields.io/badge/License-" + licenseType + "-yellow.svg)";
+    switch(licenseType) {
+      case 'MIT': badge = "![License: " + licenseType + "](https://img.shields.io/badge/License-" + licenseType + "-green.svg)";
+                    break;
+      case 'BSD':
+      case 'Apache': badge = "![License: " + licenseType + "](https://img.shields.io/badge/License-" + licenseType + "-blue.svg)";
+                    break;
+      case 'GNU': badge = "![License: " + licenseType + "](https://img.shields.io/badge/License-" + licenseType + "-yellow.svg)";
+                    break;
+      default: badge = "![License: " + licenseType + "](https://img.shields.io/badge/License-" + licenseType + "-orange.svg)";
+    }
+    badge += `\n`;
   }
   return badge;
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
+// This function returns the license link
+// If there is no license, returns an empty string
 function renderLicenseLink(license) {
-  let licenseStr = "";
+  let link = "";
   if(license) {
-    console.log("input license: "+ license);
     for (let i = 0; i < licenseList.length; i++) {
       let item = licenseList[i];
-      console.log("item[0]: " + item[0]);
       if(item[0] == license) {
-        console.log("item[1]: " + item[1]);
-        licenseStr = "This application is covered under the [" + item[0] + "]("+ item[1] + ")";
-        return licenseStr;
+        link = "("+ item[1] + ")";
+        return link;
       }
     }
   }
   return link;
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
+// This function returns the license section of README.
+// If there is no license, returns an empty string
 function renderLicenseSection(license) {
   let licenseStr = "";
   if(license) {
-    //licenseStr += renderLicenseBadge(license);
+    licenseStr += "This application is covered under the [" + license + "]";
     licenseStr += renderLicenseLink(license);
+    licenseStr += ".\n";
   }
   return licenseStr;
 }
 
-// TODO: Create a function to generate markdown for README
-//title, Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
+/* This function generates markdown for the README
+   It uses the user's responses to the questions that we posed using
+   the inquirer to populate the different sections in the README.
+   Title, License badge, Description, Table of Contents, Installation, 
+   Usage, License, Contributing, Tests, and Questions */
 function generateMarkdown(data) {
   console.log("generating markdown ...");
     let markdown = "";
@@ -70,7 +82,7 @@ function generateMarkdown(data) {
 
     // table of contents
     if(data.includeToC == true) {
-      markdown += `## Table Of Contents\n`; // how to generate the links to the sections?
+      markdown += `## Table Of Contents\n`;
       markdown += `* [Description](#description)\n`;
       markdown += `* [Installation](#installation)\n`;
       markdown += `* [Usage](#usage)\n`;
@@ -105,13 +117,11 @@ function generateMarkdown(data) {
     // Questions
     markdown += `## Questions\n`
     markdown += `Please visit https://github.com/${data.githubUsername} for more information.\n`;
-    markdown += `If you have any questions, email the author at ${data.email}.\n`;
+    markdown += `If you have any questions, email the author at <${data.email}>.\n`;
 
     return markdown;
     
 }
-
-//module.exports = generateMarkdown;
 
 module.exports = {
   generateMarkdown: generateMarkdown

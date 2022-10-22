@@ -3,8 +3,8 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
-// TODO: Create an array of questions for user input
-//title, Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
+// an array of questions for user input
+// title, Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions
 const questions = [
     {
       type: 'input',
@@ -52,8 +52,8 @@ const questions = [
       ]
     },
     {
-      type: 'input', 
-      message: "If you’d like to contribute to this project, please reach me at ", 
+      type: 'editor', 
+      message: "Please enter guidelines for developers who'd like to contribute to your project: ", 
       name: 'contributing'
     },
     {
@@ -78,19 +78,13 @@ function getUserInputs() {
               console.log(response);
               let markdown = generateMarkdown.generateMarkdown(response);
               writeToFile("./gen/README.md", markdown);
-              /*
-              fs.writeFile("./gen/README.md", markdown, function(err) {
-                if(err) {
-                  console.log("Error in writing to file: " + err);
-                } else {
-                  console.log("wrote to README.md successfully");
-                }
-              });
-              */
             });
 }
 
-// TODO: Create a function to write README file
+/* This function creates a README file with the appropriate sections.
+   The markdown was generated earlier. This function stores the generated markdown
+   to the README file. */
+
 function writeToFile(fileName, data) {
   fs.writeFile(fileName, data, function(err) {
     if(err) {
@@ -101,12 +95,11 @@ function writeToFile(fileName, data) {
   });
 }
 
-// TODO: Create a function to initialize app
 function init(){
   /* Ask user questions, get answers */
+  /* generate the README using the responses */
   getUserInputs();
 
-  /* generate the README using the responses */
 }
 
 // Function call to initialize app
