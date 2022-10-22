@@ -42,8 +42,7 @@ function renderLicenseBadge(license) {
 function renderLicenseLink(license) {
   let link = "";
   if(license) {
-    for (let i = 0; i < licenseList.length; i++) {
-      let item = licenseList[i];
+    for (const item in licenseList) {
       if(item[0] == license) {
         link = "("+ item[1] + ")";
         return link;

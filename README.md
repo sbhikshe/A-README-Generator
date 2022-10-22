@@ -16,8 +16,11 @@ This program generates a README.md markdown file, a source of information about 
 A simple version of this README was created using the generator (as seen in the video below). I included further information after generating the file - adding these notes, the video below etc.
 
 ## Video of the README.md file generation
-The README generator receives user input and generates the README.md in the *gen* folder. 
-<https://watch.screencastify.com/v/EkRye2uhgsYXVeiuBunT>
+The README generator receives user input and generates the README.md in the *gen* folder. (A *gen* folder with a sample README.md that was generated is included in the repo.)
+
+WEBM format: <https://watch.screencastify.com/v/EkRye2uhgsYXVeiuBunT>
+
+MP4 format: <https://drive.google.com/file/d/1tIestpadP5Ghv2iJRY7K9Jcfh93L146m/view?usp=sharing>
 
 ## Installation
 This requires the installation of inquirer.js and the fs (native) module. Please do the following in your bash:
@@ -28,7 +31,7 @@ $ npm install inquirer@6.3.1
 ```
 
 ## Usage
-To use this generator, please do the following:
+To use this generator, please do the following. Make the gen directory if it doesn't exist.
 
 ```bash
 $ mkdir gen
